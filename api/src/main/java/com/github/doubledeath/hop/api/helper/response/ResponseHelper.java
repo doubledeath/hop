@@ -17,7 +17,7 @@ public final class ResponseHelper {
     /**
      * Supports only application/json
      */
-    public static Response buildEmptyResponse(Response.Status status, MediaType mediaType) {
+    public static Response buildEmptyResponse(MediaType mediaType, Response.Status status) {
         checkMediaType(mediaType);
 
         return Response.status(status)
@@ -30,7 +30,7 @@ public final class ResponseHelper {
      * Supports only application/json
      */
     public static Response buildOkEmptyResponse(MediaType mediaType) {
-        return buildEmptyResponse(Response.Status.OK, mediaType);
+        return buildEmptyResponse(mediaType, Response.Status.OK);
     }
 
     /**

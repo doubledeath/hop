@@ -19,7 +19,7 @@ public final class UserResponse {
             case USER_EXISTS_ERROR:
                 return ResponseHelper.buildCodeMessageDetailsResponse(
                         MediaType.APPLICATION_JSON_TYPE,
-                        Response.Status.BAD_REQUEST,
+                        Response.Status.CONFLICT,
                         ResponseCodes.USER_EXISTS_ERROR,
                         ResponseMessages.USER_EXISTS_ERROR
                 );
@@ -37,8 +37,8 @@ public final class UserResponse {
     public static Response update(User user) {
         if (user == null) {
             return ResponseHelper.buildEmptyResponse(
-                    Response.Status.CONFLICT,
-                    MediaType.APPLICATION_JSON_TYPE
+                    MediaType.APPLICATION_JSON_TYPE,
+                    Response.Status.CONFLICT
             );
         } else {
             return ResponseHelper.buildOkEmptyResponse(MediaType.APPLICATION_JSON_TYPE);
@@ -48,8 +48,8 @@ public final class UserResponse {
     public static Response info(User user, boolean self) {
         if (user == null) {
             return ResponseHelper.buildEmptyResponse(
-                    Response.Status.NOT_FOUND,
-                    MediaType.APPLICATION_JSON_TYPE
+                    MediaType.APPLICATION_JSON_TYPE,
+                    Response.Status.NOT_FOUND
             );
         } else {
             UserInfoResponse userInfoResponse = new UserInfoResponse();
