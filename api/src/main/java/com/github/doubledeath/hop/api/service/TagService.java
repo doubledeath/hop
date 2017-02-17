@@ -5,6 +5,8 @@ package com.github.doubledeath.hop.api.service;
  */
 public interface TagService {
 
+    Long newSimpleTag();
+
     String newComplexTag(String login);
 
 }

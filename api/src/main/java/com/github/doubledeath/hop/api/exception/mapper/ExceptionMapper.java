@@ -16,6 +16,8 @@ public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Exceptio
 
     @Override
     public Response toResponse(Exception exception) {
+        exception.printStackTrace();
+
         return ResponseHelper.buildCodeMessageDetailsResponse(
                 MediaType.APPLICATION_JSON_TYPE,
                 Response.Status.INTERNAL_SERVER_ERROR,

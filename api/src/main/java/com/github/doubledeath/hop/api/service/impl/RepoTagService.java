@@ -35,6 +35,11 @@ public class RepoTagService implements TagService {
     }
 
     @Override
+    public Long newSimpleTag() {
+        return tagRepo.newSimpleTag();
+    }
+
+    @Override
     public String newComplexTag(String login) {
         return TagHelper.getComplexTag(login, tagRepo.newSimpleTag());
     }

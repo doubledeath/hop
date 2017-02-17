@@ -1,8 +1,11 @@
 package com.github.doubledeath.hop.api.producer;
 
+import com.github.doubledeath.hop.api.database.repo.HallRepo;
 import com.github.doubledeath.hop.api.database.repo.TagRepo;
+import com.github.doubledeath.hop.api.database.repo.impl.EntityManagerPostgresHallRepo;
 import com.github.doubledeath.hop.api.database.repo.impl.EntityManagerRepoHelper;
 import com.github.doubledeath.hop.api.database.repo.impl.EntityManagerSimpleTagRepo;
+import com.github.doubledeath.hop.api.service.TagService;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Singleton;
@@ -33,6 +36,11 @@ public class RepoProducer {
     @Produces
     public TagRepo entityManagerSimpleTagRepo(EntityManagerRepoHelper entityManagerRepoHelper) {
         return new EntityManagerSimpleTagRepo(entityManagerRepoHelper);
+    }
+
+    @Produces
+    public HallRepo entityManagerPostgresHallRepo(EntityManagerRepoHelper entityManagerRepoHelper, TagService tagService) {
+        return new EntityManagerPostgresHallRepo(entityManagerRepoHelper, tagService);
     }
 
 }

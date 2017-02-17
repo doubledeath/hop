@@ -21,6 +21,8 @@ public class ValidationExceptionMapper implements ExceptionMapper<ValidationExce
 
     @Override
     public Response toResponse(ValidationException validationException) {
+        validationException.printStackTrace();
+
         Response.Status status;
         Long code;
         String message;

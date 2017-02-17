@@ -16,6 +16,7 @@
         <web-resource-collection>
             <web-resource-name/>
             <url-pattern>/api/user/sign_up</url-pattern>
+            <url-pattern>/api/hall/test</url-pattern>
         </web-resource-collection>
     </security-constraint>
 

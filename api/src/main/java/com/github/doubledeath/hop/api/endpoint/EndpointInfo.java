@@ -19,4 +19,9 @@ public final class EndpointInfo {
         public static final String UPDATE = "/update";
     }
 
+    public static final String HALL = "/hall";
+    public static final class Hall {
+
+    }
+
 }
