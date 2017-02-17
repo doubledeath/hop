@@ -1,0 +1,7 @@
+target
+*.iml
+*.idea
+*.db
+keycloak.json
+keycloak-admin-access.json
+project-defaults.yml

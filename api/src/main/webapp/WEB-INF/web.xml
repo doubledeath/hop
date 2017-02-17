@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="2.4">
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name/>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name/>
+            <url-pattern>/api/user/sign_up</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name/>
+            <url-pattern>/api/user/info</url-pattern>
+            <url-pattern>/api/user/update</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>game_master</role-name>
+            <role-name>player</role-name>
+            <role-name>guest</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>KEYCLOAK</auth-method>
+        <realm-name>hop</realm-name>
+    </login-config>
+
+</web-app>
