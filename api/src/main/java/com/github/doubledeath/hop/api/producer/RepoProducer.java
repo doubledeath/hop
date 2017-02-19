@@ -39,8 +39,8 @@ public class RepoProducer {
     }
 
     @Produces
-    public HallRepo entityManagerPostgresHallRepo(EntityManagerRepoHelper entityManagerRepoHelper, TagService tagService) {
-        return new EntityManagerPostgresHallRepo(entityManagerRepoHelper, tagService);
+    public HallRepo entityManagerPostgresHallRepo(EntityManagerRepoHelper entityManagerRepoHelper) {
+        return new EntityManagerPostgresHallRepo(entityManagerRepoHelper);
     }
 
 }
