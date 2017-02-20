@@ -1,50 +1,26 @@
-package com.github.doubledeath.hop.api.database.entity;
+package com.github.doubledeath.hop.api.model;
 
-import com.github.doubledeath.hop.api.helper.hibernate.HibernateHelper;
-import com.github.doubledeath.hop.api.helper.hibernate.JsonbBetweenListLongConverter;
+import com.github.doubledeath.hop.api.database.entity.HallEntity;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by doubledeath on 2/17/17.
  */
-@Entity
-public class HallEntity implements Serializable {
-
-    private static final long serialVersionUID = -527771479450577294L;
+public class Hall {
 
     public enum Visibility {
         PRIVATE, PUBLIC
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true)
     private Long tag;
     private Long owner;
-    @Enumerated(EnumType.STRING)
     private Visibility visibility;
-    @Column(columnDefinition = HibernateHelper.DATA_TYPE_TEXT)
     private String displayName;
     private String description;
     private Long size;
-    @Column(columnDefinition = HibernateHelper.DATA_TYPE_JSONB)
-    @Convert(converter = JsonbBetweenListLongConverter.class)
     private List<Long> userList;
-    @Column(columnDefinition = HibernateHelper.DATA_TYPE_JSONB)
-    @Convert(converter = JsonbBetweenListLongConverter.class)
     private List<Long> bannedUserList;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getTag() {
         return tag;

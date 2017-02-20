@@ -1,9 +1,14 @@
 package com.github.doubledeath.hop.api.database.repo.impl;
 
+import com.github.doubledeath.hop.api.database.entity.SimpleTagEntity;
+
 import javax.inject.Inject;
 import javax.inject.Qualifier;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.*;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

@@ -2,6 +2,7 @@ package com.github.doubledeath.hop.api.endpoint.response;
 
 import com.github.doubledeath.hop.api.helper.response.ResponseHelper;
 import com.github.doubledeath.hop.api.model.User;
+import com.github.doubledeath.hop.api.model.mapper.UserMapper;
 import com.github.doubledeath.hop.api.service.UserService;
 
 import javax.ws.rs.core.MediaType;
@@ -35,37 +36,14 @@ public final class UserResponse {
     }
 
     public static Response update(User user) {
-        if (user == null) {
-            return ResponseHelper.buildEmptyResponse(
-                    MediaType.APPLICATION_JSON_TYPE,
-                    Response.Status.CONFLICT
-            );
-        } else {
-            return ResponseHelper.buildOkEmptyResponse(MediaType.APPLICATION_JSON_TYPE);
-        }
+        return info(user, true);
     }
 
     public static Response info(User user, boolean self) {
-        if (user == null) {
-            return ResponseHelper.buildEmptyResponse(
-                    MediaType.APPLICATION_JSON_TYPE,
-                    Response.Status.NOT_FOUND
-            );
-        } else {
-            UserInfoResponse userInfoResponse = new UserInfoResponse();
-
-            userInfoResponse.setDisplayName(user.getDisplayName());
-            userInfoResponse.setDescription(user.getDescription());
-
-            if (self) {
-                userInfoResponse.setTag(user.getSimpleTag());
-            }
-
-            return Response.ok()
-                    .entity(userInfoResponse)
-                    .type(MediaType.APPLICATION_JSON_TYPE)
-                    .build();
-        }
+        return Response.ok()
+                .entity(UserMapper.toUserInfoResponse(user))
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .build();
     }
 
 }

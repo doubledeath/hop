@@ -5,7 +5,8 @@ import com.github.doubledeath.hop.api.endpoint.request.UpdateUserRequest;
 import com.github.doubledeath.hop.api.endpoint.response.ResponseCodes;
 import com.github.doubledeath.hop.api.endpoint.response.ResponseMessages;
 import com.github.doubledeath.hop.api.endpoint.response.UserResponse;
-import com.github.doubledeath.hop.api.helper.response.ResponseHelper;
+import com.github.doubledeath.hop.api.exception.BadRequestException;
+import com.github.doubledeath.hop.api.exception.NotFoundException;
 import com.github.doubledeath.hop.api.model.User;
 import com.github.doubledeath.hop.api.model.mapper.UserMapper;
 import com.github.doubledeath.hop.api.service.UserService;
@@ -22,6 +23,7 @@ import javax.ws.rs.core.SecurityContext;
  * Created by doubledeath on 2/16/17.
  */
 @Path(EndpointInfo.USER)
+@SuppressWarnings("UnusedDeclaration")
 public class UserEndpoint {
 
     @Inject
@@ -41,15 +43,9 @@ public class UserEndpoint {
     @Path(EndpointInfo.User.UPDATE)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@Valid UpdateUserRequest request) {
+    public Response updateInfo(@Valid UpdateUserRequest request) {
         if (request.getDisplayName() == null && request.getDescription() == null) {
-            return ResponseHelper.buildCodeMessageDetailsResponse(
-                    MediaType.APPLICATION_JSON_TYPE,
-                    Response.Status.BAD_REQUEST,
-                    ResponseCodes.USER_INFO_ERROR,
-                    ResponseMessages.USER_INFO_ERROR,
-                    "json does not contain display_name or description fields"
-            );
+            throw new BadRequestException(new String[]{"json does not contain display_name or description fields"});
         }
 
         User user = UserMapper.fromSecurityContext(securityContext);
@@ -69,6 +65,10 @@ public class UserEndpoint {
 
         if (!self) {
             user = userService.findBySimpleTag(tag);
+
+            if (user == null) {
+                throw new NotFoundException(ResponseCodes.USER_NOT_FOUND_ERROR, ResponseMessages.USER_NOT_FOUND_ERROR);
+            }
         }
 
         return UserResponse.info(user, self);

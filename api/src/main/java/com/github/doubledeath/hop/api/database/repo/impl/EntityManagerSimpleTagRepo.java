@@ -39,7 +39,7 @@ public class EntityManagerSimpleTagRepo implements TagRepo {
     }
 
     @Override
-    public Long newSimpleTag() {
+    public Long create() {
         CriteriaBuilder criteriaBuilder = entityManagerRepoHelper.entityManager().getCriteriaBuilder();
         CriteriaQuery<SimpleTagEntity> criteriaQuery = criteriaBuilder.createQuery(SimpleTagEntity.class);
         SimpleTagEntity initSimpleTagEntity;
@@ -47,9 +47,7 @@ public class EntityManagerSimpleTagRepo implements TagRepo {
         //if table is empty hibernate throwing NoResultException instead of return null
         try {
             initSimpleTagEntity = entityManagerRepoHelper.entityManager()
-                    .createQuery(criteriaQuery
-                            .select(criteriaQuery
-                                    .from(SimpleTagEntity.class)))
+                    .createQuery(criteriaQuery.select(criteriaQuery.from(SimpleTagEntity.class)))
                     .getSingleResult();
         } catch (NoResultException exception) {
             initSimpleTagEntity = null;

@@ -1,5 +1,6 @@
 package com.github.doubledeath.hop.api.model.mapper;
 
+import com.github.doubledeath.hop.api.endpoint.response.UserInfoResponse;
 import com.github.doubledeath.hop.api.helper.KeycloakHelper;
 import com.github.doubledeath.hop.api.helper.TagHelper;
 import com.github.doubledeath.hop.api.model.User;
@@ -68,6 +69,16 @@ public final class UserMapper {
         }
 
         return user;
+    }
+
+    public static UserInfoResponse toUserInfoResponse(User user) {
+        UserInfoResponse userInfoResponse = new UserInfoResponse();
+
+        userInfoResponse.setTag(user.getSimpleTag());
+        userInfoResponse.setDisplayName(user.getDisplayName());
+        userInfoResponse.setDescription(user.getDescription());
+
+        return userInfoResponse;
     }
 
 }

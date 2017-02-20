@@ -103,7 +103,7 @@ public class KeycloakAdminClientUserService implements UserService {
         user.setLogin(login);
         user.setDisplayName(login);
 
-        String newComplexTag = tagService.newComplexTag(login);
+        String newComplexTag = tagService.createComplexTag(login);
 
         user.setSimpleTag(TagHelper.getSimpleTag(newComplexTag));
         user.setComplexTag(newComplexTag);

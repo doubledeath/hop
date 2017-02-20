@@ -5,6 +5,6 @@ package com.github.doubledeath.hop.api.database.repo;
  */
 public interface TagRepo {
 
-    Long newSimpleTag();
+    Long create();
 
 }
