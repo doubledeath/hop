@@ -70,7 +70,7 @@ public class EntityManagerPostgresHallRepo implements HallRepo {
         entityManagerRepoHelper.runInTransaction(() -> {
             try {
                 entityManagerRepoHelper.entityManager().createNativeQuery(
-                        "update into set" +
+                        "update hallentity set" +
                                 " tag = " + target.getTag() +
                                 ", visibility = '" + target.getVisibility().name() + "'" +
                                 ", displayname = '" + target.getDisplayName() + "'" +
