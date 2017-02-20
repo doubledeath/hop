@@ -1,5 +1,7 @@
 package com.github.doubledeath.hop.api.endpoint;
 
+import com.github.doubledeath.hop.api.base.BaseMapper;
+import com.github.doubledeath.hop.api.base.Mapper;
 import com.github.doubledeath.hop.api.endpoint.request.SignUpUserRequest;
 import com.github.doubledeath.hop.api.endpoint.request.UpdateUserRequest;
 import com.github.doubledeath.hop.api.endpoint.response.ResponseCodes;
@@ -26,17 +28,31 @@ import javax.ws.rs.core.SecurityContext;
 @SuppressWarnings("UnusedDeclaration")
 public class UserEndpoint {
 
-    @Inject
+//    @Inject
     private UserService userService;
     @Context
     private SecurityContext securityContext;
+    @Inject
+//    @Mapper(Mapper.Type.IMPL_1)
+    private BaseMapper<Object, Long> mapper;
+    @Inject
+//    @Mapper(Mapper.Type.IMPL_2)
+    private BaseMapper<Object, String> mapper2;
+
+//    @POST
+//    @Path(EndpointInfo.User.SIGN_UP)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response signUp(@Valid SignUpUserRequest request) {
+//        return UserResponse.signUp(userService.signUp(request.getLogin(), request.getPassword()));
+//    }
 
     @POST
     @Path(EndpointInfo.User.SIGN_UP)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response signUp(@Valid SignUpUserRequest request) {
-        return UserResponse.signUp(userService.signUp(request.getLogin(), request.getPassword()));
+    public void signUp() {
+        System.out.println(mapper + "!");
+        System.out.println(mapper2 + "!");
+//        return UserResponse.signUp(userService.signUp(request.getLogin(), request.getPassword()));
     }
 
     @POST
