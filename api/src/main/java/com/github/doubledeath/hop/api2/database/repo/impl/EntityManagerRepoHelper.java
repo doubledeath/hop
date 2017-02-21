@@ -1,4 +1,4 @@
-package com.github.doubledeath.hop.api.database.repo.impl;
+package com.github.doubledeath.hop.api2.database.repo.impl;
 
 import javax.inject.Inject;
 import javax.inject.Qualifier;
@@ -17,13 +17,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @EntityManagerRepoHelper.Impl
 public class EntityManagerRepoHelper {
-
-    @Qualifier
-    @Retention(RUNTIME)
-    @Target({TYPE, METHOD, FIELD})
-    @interface Impl {
-
-    }
 
     private EntityManager entityManager;
     private UserTransaction userTransaction;
@@ -54,6 +47,13 @@ public class EntityManagerRepoHelper {
 
             throw new RuntimeException(exception);
         }
+    }
+
+    @Qualifier
+    @Retention(RUNTIME)
+    @Target({TYPE, METHOD, FIELD})
+    @interface Impl {
+
     }
 
 }
