@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.doubledeath.hop.api2.base.Mapper;
 import com.github.doubledeath.hop.api2.exception.ConflictException;
+import com.github.doubledeath.hop.api2.exception.NotFoundException;
 import com.github.doubledeath.hop.api2.model.ComplexTag;
 import com.github.doubledeath.hop.api2.model.SimpleTag;
 import com.github.doubledeath.hop.api2.model.User;
@@ -93,10 +94,7 @@ public class KeycloakAdminClientUserService implements UserService {
 
     @Override
     public User findOneBySimpleTag(SimpleTag simpleTag) {
-        List<UserRepresentation> userRepresentationList = realm.users()
-                .search(null, tagBuilder.buildComplexTag(simpleTag, "").getValue(), null, null, null, null);
-
-        return userRepresentationList.size() == 1 ? mapper.from(userRepresentationList.get(0)) : null;
+        return checkUserExists(simpleTag);
     }
 
     @Override
@@ -138,8 +136,40 @@ public class KeycloakAdminClientUserService implements UserService {
     }
 
     @Override
-    public User updateInfo(User user) {
+    public User updateInfo(User target) {
+        if (target == null) {
+            throw new NotFoundException(
+                    com.github.doubledeath.hop.api2.info.Response.Code.USER_NOT_FOUND_ERROR,
+                    com.github.doubledeath.hop.api2.info.Response.Message.USER_NOT_FOUND_ERROR
+            );
+        }
+
+        User user = checkUserExists(target.getSimpleTag());
+
         realm.users().get(user.getId()).update(mapper.to(user));
+
+        return user;
+    }
+
+    private User checkUserExists(SimpleTag simpleTag) {
+        if (simpleTag == null) {
+            throw new NotFoundException(
+                    com.github.doubledeath.hop.api2.info.Response.Code.USER_NOT_FOUND_ERROR,
+                    com.github.doubledeath.hop.api2.info.Response.Message.USER_NOT_FOUND_ERROR
+            );
+        }
+
+        List<UserRepresentation> userRepresentationList = realm.users()
+                .search(null, tagBuilder.buildComplexTag(simpleTag, "").getValue(), null, null, null, null);
+
+        User user = userRepresentationList.size() == 1 ? mapper.from(userRepresentationList.get(0)) : null;
+
+        if (user == null) {
+            throw new NotFoundException(
+                    com.github.doubledeath.hop.api2.info.Response.Code.USER_NOT_FOUND_ERROR,
+                    com.github.doubledeath.hop.api2.info.Response.Message.USER_NOT_FOUND_ERROR
+            );
+        }
 
         return user;
     }

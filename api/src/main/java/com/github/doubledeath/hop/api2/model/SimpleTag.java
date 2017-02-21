@@ -15,4 +15,9 @@ public class SimpleTag {
         this.value = value;
     }
 
+    @Override
+    public boolean equals(Object target) {
+        return this == target || (target instanceof SimpleTag && value.equals(((SimpleTag) target).value));
+    }
+
 }

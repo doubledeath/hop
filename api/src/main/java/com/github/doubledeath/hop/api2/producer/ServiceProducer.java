@@ -35,8 +35,8 @@ public class ServiceProducer {
     }
 
     @Produces
-    public HallService repoHallService(HallRepo hallRepo, TagService tagService, Mapper<Hall, HallEntity> mapper) {
-        return new RepoHallService(hallRepo, tagService, mapper);
+    public HallService repoHallService(HallRepo hallRepo, TagService tagService, UserService userService, Mapper<Hall, HallEntity> mapper) {
+        return new RepoHallService(hallRepo, tagService, userService, mapper);
     }
 
 }
