@@ -17,21 +17,43 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @HallToEntityMapper.Impl
 public class HallToEntityMapper extends Mapper<Hall, HallEntity> {
 
+    @Override
+    protected Hall fromImpl(HallEntity from) {
+        Hall hall = new Hall();
+
+        hall.setTag(from.getTag());
+        hall.setOwner(from.getOwner());
+        hall.setVisibility(Hall.Visibility.valueOf(from.getVisibility().name()));
+        hall.setDisplayName(from.getDisplayName());
+        hall.setDescription(from.getDescription());
+        hall.setSize(from.getSize());
+        hall.setUserList(from.getUserList());
+        hall.setUserBanList(from.getUserBanList());
+
+        return hall;
+    }
+
+    @Override
+    protected HallEntity toImpl(Hall to) {
+        HallEntity hallEntity = new HallEntity();
+
+        hallEntity.setTag(to.getTag());
+        hallEntity.setOwner(to.getOwner());
+        hallEntity.setVisibility(HallEntity.Visibility.valueOf(to.getVisibility().name()));
+        hallEntity.setDisplayName(to.getDisplayName());
+        hallEntity.setDescription(to.getDescription());
+        hallEntity.setSize(to.getSize());
+        hallEntity.setUserList(to.getUserList());
+        hallEntity.setUserBanList(to.getUserBanList());
+
+        return hallEntity;
+    }
+
     @Qualifier
     @Retention(RUNTIME)
     @Target({TYPE, METHOD, FIELD, PARAMETER})
     @interface Impl {
 
-    }
-
-    @Override
-    protected Hall fromImpl(HallEntity from) {
-        return null;
-    }
-
-    @Override
-    protected HallEntity toImpl(Hall to) {
-        return null;
     }
 
 }

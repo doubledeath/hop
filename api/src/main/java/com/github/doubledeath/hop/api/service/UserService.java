@@ -1,5 +1,6 @@
 package com.github.doubledeath.hop.api.service;
 
+import com.github.doubledeath.hop.api.model.Hall;
 import com.github.doubledeath.hop.api.model.User;
 
 /**

@@ -1,4 +1,4 @@
-package com.github.doubledeath.hop.api.endpoint;
+package com.github.doubledeath.hop.api;
 
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
@@ -8,9 +8,9 @@ import org.wildfly.swarm.arquillian.DefaultDeployment;
 /**
  * Created by doubledeath on 2/19/17.
  */
+@DefaultDeployment
 @RunWith(Arquillian.class)
-//@DefaultDeployment
-public class UserEndpointTest {
+public class HallEndpointTest {
 
     @Test
     public void test() {
