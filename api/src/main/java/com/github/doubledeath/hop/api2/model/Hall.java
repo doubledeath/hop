@@ -11,8 +11,8 @@ public class Hall {
         PRIVATE, PUBLIC
     }
 
-    private Long tag;
-    private Long owner;
+    private SimpleTag tag;
+    private SimpleTag owner;
     private Visibility visibility;
     private String displayName;
     private String description;
@@ -20,19 +20,19 @@ public class Hall {
     private List<Long> userList;
     private List<Long> userBanList;
 
-    public Long getTag() {
+    public SimpleTag getTag() {
         return tag;
     }
 
-    public void setTag(Long tag) {
+    public void setTag(SimpleTag tag) {
         this.tag = tag;
     }
 
-    public Long getOwner() {
+    public SimpleTag getOwner() {
         return owner;
     }
 
-    public void setOwner(Long owner) {
+    public void setOwner(SimpleTag owner) {
         this.owner = owner;
     }
 

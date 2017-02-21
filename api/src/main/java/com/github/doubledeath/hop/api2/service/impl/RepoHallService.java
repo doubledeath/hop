@@ -5,11 +5,13 @@ import com.github.doubledeath.hop.api2.database.entity.HallEntity;
 import com.github.doubledeath.hop.api2.database.repo.HallRepo;
 import com.github.doubledeath.hop.api2.exception.AccessDeniedException;
 import com.github.doubledeath.hop.api2.exception.ConflictException;
+import com.github.doubledeath.hop.api2.exception.NotFoundException;
 import com.github.doubledeath.hop.api2.info.Response;
 import com.github.doubledeath.hop.api2.model.Hall;
 import com.github.doubledeath.hop.api2.model.User;
 import com.github.doubledeath.hop.api2.service.HallService;
 import com.github.doubledeath.hop.api2.service.TagService;
+import com.github.doubledeath.hop.api2.service.UserService;
 
 import javax.inject.Inject;
 import javax.inject.Qualifier;
@@ -28,10 +30,11 @@ public class RepoHallService implements HallService {
 
     private HallRepo hallRepo;
     private TagService tagService;
+    private UserService userService;
     private Mapper<Hall, HallEntity> mapper;
 
     @Inject
-    public RepoHallService(HallRepo hallRepo, TagService tagService, Mapper<Hall, HallEntity> mapper) {
+    public RepoHallService(HallRepo hallRepo, TagService tagService, UserService userService, Mapper<Hall, HallEntity> mapper) {
         this.hallRepo = hallRepo;
         this.tagService = tagService;
         this.mapper = mapper;
@@ -39,7 +42,7 @@ public class RepoHallService implements HallService {
 
     @Override
     public Hall findOneByTagValue(Long tag) {
-        return mapper.from(hallRepo.findOneByTag(tag));
+        return checkHallExists(mapper.from(hallRepo.findOneByTag(tag)));
     }
 
     @Override
@@ -55,12 +58,12 @@ public class RepoHallService implements HallService {
 
     @Override
     public Hall update(Hall hall) {
-        return updateImpl(hall);
+        return updateImpl(checkHallExists(hall));
     }
 
     @Override
     public void delete(Hall target) {
-        Hall hall = mapper.from(hallRepo.findOneByTag(target.getTag()));
+        Hall hall = checkHallExists(target);
 
         hall.setUserList(Collections.emptyList());
         //in this situation, check will always do job
@@ -68,7 +71,9 @@ public class RepoHallService implements HallService {
     }
 
     @Override
-    public void enter(Hall hall, User user) {
+    public void enter(Hall target, User user) {
+        Hall hall = checkHallExists(target);
+
         if (isUserInBanList(hall, user)) {
             throw new AccessDeniedException(Response.Code.USER_IN_BAN_LIST_ERROR, Response.Message.USER_IN_BAN_LIST_ERROR);
         }
@@ -85,7 +90,9 @@ public class RepoHallService implements HallService {
     }
 
     @Override
-    public void leave(Hall hall, User user) {
+    public void leave(Hall target, User user) {
+        Hall hall = checkHallExists(target);
+
         if (hall.getUserList().contains(user.getSimpleTag().getValue())) {
             hall.getUserList().remove(user.getSimpleTag().getValue());
 
@@ -96,7 +103,9 @@ public class RepoHallService implements HallService {
     }
 
     @Override
-    public void ban(Hall hall, User user) {
+    public void ban(Hall target, User user) {
+        Hall hall = checkHallExists(target);
+
         if (!isUserInBanList(hall, user)) {
             hall.getUserBanList().add(user.getSimpleTag().getValue());
 
@@ -107,7 +116,9 @@ public class RepoHallService implements HallService {
     }
 
     @Override
-    public void unban(Hall hall, User user) {
+    public void unban(Hall target, User user) {
+        Hall hall = checkHallExists(target);
+
         if (isUserInBanList(hall, user)) {
             hall.getUserBanList().remove(user.getSimpleTag().getValue());
 
@@ -118,8 +129,10 @@ public class RepoHallService implements HallService {
     }
 
     @Override
-    public boolean isUserOwner(Hall hall, User user) {
-        return hall.getOwner().equals(user.getSimpleTag().getValue());
+    public boolean isUserOwner(Hall target, User user) {
+        Hall hall = checkHallExists(target);
+
+        return hall.getOwner().equals(user.getSimpleTag());
     }
 
     private boolean isUserInBanList(Hall hall, User user) {
@@ -127,7 +140,11 @@ public class RepoHallService implements HallService {
     }
 
     private Hall updateImpl(Hall hall) {
-        HallEntity hallEntity = hallRepo.findOneByTag(hall.getTag());
+        HallEntity hallEntity = hallRepo.findOneByTag(hall.getTag().getValue());
+
+        if (hallEntity == null) {
+            throw new NotFoundException(Response.Code.HALL_NOT_FOUND_ERROR, Response.Message.HALL_NOT_FOUND_ERROR);
+        }
 
         //visibility changed, need to generate new tag
         if (!hall.getVisibility().name().equals(hallEntity.getVisibility().name())) {
@@ -145,6 +162,28 @@ public class RepoHallService implements HallService {
         if (hall.getUserList().size() == 0) {
             hallRepo.delete(mapper.to(hall));
         }
+    }
+
+    private User checkUserExists(User target) {
+        if (target == null) {
+            throw new NotFoundException(Response.Code.USER_NOT_FOUND_ERROR, Response.Message.USER_NOT_FOUND_ERROR);
+        }
+
+        return userService.findOneBySimpleTag(target.getSimpleTag());
+    }
+
+    private Hall checkHallExists(Hall target) {
+        if (target == null) {
+            throw new NotFoundException(Response.Code.HALL_NOT_FOUND_ERROR, Response.Message.HALL_NOT_FOUND_ERROR);
+        }
+
+        Hall hall = mapper.from(hallRepo.findOneByTag(target.getTag().getValue()));
+
+        if (hall == null) {
+            throw new NotFoundException(Response.Code.HALL_NOT_FOUND_ERROR, Response.Message.HALL_NOT_FOUND_ERROR);
+        }
+
+        return hall;
     }
 
     @Qualifier
