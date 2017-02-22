@@ -11,10 +11,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface HallService {
 
+    @NotNull
     Hall create(@NotNull HallCreateRequest hallCreateRequest);
 
+    @NotNull
     Hall find(@NotNull Tag tag);
 
+    @NotNull
     Hall update(@NotNull Tag hallTag, @NotNull HallUpdateRequest hallUpdateRequest);
 
     void delete(@NotNull Tag hallTag);

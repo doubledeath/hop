@@ -13,17 +13,14 @@ public class KeyBuilder {
 
     private static final String MESSAGE_DIGEST_ALGORITHM = "SHA-1";
 
+    @NotNull
     public Key build(@NotNull String seed) {
-        Key key = new Key();
-
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(MESSAGE_DIGEST_ALGORITHM);
 
             messageDigest.update(seed.getBytes());
 
-            key.setValue(new String(messageDigest.digest()));
-
-            return key;
+            return new Key(new String(messageDigest.digest()));
         } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
             throw new RuntimeException(noSuchAlgorithmException);
         }
