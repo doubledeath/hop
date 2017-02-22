@@ -20,4 +20,15 @@ public class TagBuilder {
         return tag;
     }
 
+    @NotNull
+    public Tag build(@NotNull String complexValue) {
+        Long seed = Long.valueOf(complexValue.substring(complexValue.lastIndexOf(PREFIX_SEPARATOR) + PREFIX_SEPARATOR.length()));
+
+        Tag tag = new Tag(seed);
+
+        tag.setComplexValue(complexValue);
+
+        return tag;
+    }
+
 }

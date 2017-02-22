@@ -2,6 +2,7 @@ package com.github.doubledeath.hop.api3.database.repo.impl;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Qualifier;
 import javax.persistence.EntityManager;
@@ -17,7 +18,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Created by doubledeath on 2/22/17.
  */
-@EntityManagerRepoHelper.Impl
 public class EntityManagerRepoHelper {
 
     private EntityManager entityManager;
@@ -50,13 +50,6 @@ public class EntityManagerRepoHelper {
 
             throw new RuntimeException(exception);
         }
-    }
-
-    @Qualifier
-    @Retention(RUNTIME)
-    @Target({TYPE, METHOD, FIELD, PARAMETER})
-    @interface Impl {
-
     }
 
 }

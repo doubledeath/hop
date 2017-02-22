@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,10 +32,10 @@ public class HallEntity implements Serializable {
     private String key;
     @Column(columnDefinition = "text")
     private String description;
-    @Column(columnDefinition = "jsonb", nullable = false)
+    @Column(columnDefinition = "jsonb default '[]'", nullable = false)
     @Convert(converter = ListLongToJsonbConverter.class)
     private List<Long> userList;
-    @Column(columnDefinition = "jsonb", nullable = false)
+    @Column(columnDefinition = "jsonb default '[]'", nullable = false)
     @Convert(converter = ListLongToJsonbConverter.class)
     private List<Long> userBanlist;
 
