@@ -11,10 +11,10 @@ public class TagBuilder {
 
     private static final String PREFIX_SEPARATOR = "#";
 
+    @NotNull
     public Tag build(@NotNull Long seed, @Nullable String prefix) {
-        Tag tag = new Tag();
+        Tag tag = new Tag(seed);
 
-        tag.setSimpleValue(seed);
         tag.setComplexValue(prefix == null ? null : prefix + PREFIX_SEPARATOR + seed);
 
         return tag;
