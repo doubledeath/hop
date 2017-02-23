@@ -7,17 +7,14 @@ import com.github.doubledeath.hop.api3.service.request.HallCreateRequest;
 import com.github.doubledeath.hop.api3.service.request.HallUpdateRequest;
 import org.jetbrains.annotations.NotNull;
 
-import javax.inject.Qualifier;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 
 /**
  * Created by doubledeath on 2/22/17.
  */
-@RepoHallService.Impl
+@SuppressWarnings("unused")
+@Dependent
 public class RepoHallService implements HallService {
 
     @NotNull
@@ -66,13 +63,6 @@ public class RepoHallService implements HallService {
     @Override
     public boolean isOwner(@NotNull Tag hallTag, @NotNull Tag userTag) {
         return false;
-    }
-
-    @Qualifier
-    @Retention(RUNTIME)
-    @Target({TYPE, METHOD, FIELD, PARAMETER})
-    @interface Impl {
-
     }
 
 }

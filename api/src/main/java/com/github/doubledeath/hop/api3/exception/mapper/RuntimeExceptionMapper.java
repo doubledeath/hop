@@ -1,6 +1,6 @@
 package com.github.doubledeath.hop.api3.exception.mapper;
 
-import com.github.doubledeath.hop.api2.exception.StatusCodeMessageException;
+import com.github.doubledeath.hop.api3.exception.StatusCodeMessageException;
 import com.github.doubledeath.hop.api3.exception.response.CodeMessageDetailsResponse;
 import com.github.doubledeath.hop.api3.ref.ResponseRef;
 import org.jetbrains.annotations.NotNull;
