@@ -83,4 +83,9 @@ public class Hall {
         this.userBanlist = userBanlist;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        return this == object || object instanceof Hall && tag.equals(((Hall) object).tag);
+    }
+
 }

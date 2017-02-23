@@ -1,10 +1,12 @@
 package com.github.doubledeath.hop.api3.service;
 
 import com.github.doubledeath.hop.api3.model.Hall;
+import com.github.doubledeath.hop.api3.model.Key;
 import com.github.doubledeath.hop.api3.model.Tag;
 import com.github.doubledeath.hop.api3.service.request.HallCreateRequest;
 import com.github.doubledeath.hop.api3.service.request.HallUpdateRequest;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by doubledeath on 2/21/17.
@@ -18,11 +20,11 @@ public interface HallService {
     Hall find(@NotNull Tag tag);
 
     @NotNull
-    Hall update(@NotNull Tag hallTag, @NotNull HallUpdateRequest hallUpdateRequest);
+    Hall update(@NotNull Tag tag, @NotNull HallUpdateRequest hallUpdateRequest);
 
-    void delete(@NotNull Tag hallTag);
+    void delete(@NotNull Tag tag);
 
-    void enter(@NotNull Tag hallTag, @NotNull Tag userTag);
+    void enter(@NotNull Tag hallTag, @NotNull Tag userTag, @Nullable Key key);
 
     void leave(@NotNull Tag hallTag, @NotNull Tag userTag);
 
