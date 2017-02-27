@@ -14,8 +14,8 @@ import com.github.doubledeath.hop.api3.ref.ResponseRef;
 import com.github.doubledeath.hop.api3.service.HallService;
 import com.github.doubledeath.hop.api3.service.TagService;
 import com.github.doubledeath.hop.api3.service.UserService;
-import com.github.doubledeath.hop.api3.service.request.HallCreateRequest;
-import com.github.doubledeath.hop.api3.service.request.HallUpdateRequest;
+import com.github.doubledeath.hop.api3.service.form.CreateHallForm;
+import com.github.doubledeath.hop.api3.service.form.UpdateHallForm;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,21 +41,21 @@ public class RepoHallService implements HallService {
 
     @NotNull
     @Override
-    public Hall create(@NotNull HallCreateRequest hallCreateRequest) {
+    public Hall create(@NotNull CreateHallForm createHallForm) {
         HallEntity hallEntity = hallRepo.create(
                 tagService.create(null).getSimpleValue(),
-                hallCreateRequest.getOwner().getSimpleValue(),
-                hallCreateRequest.getSize(),
-                hallCreateRequest.getDisplayName()
+                createHallForm.getOwner().getSimpleValue(),
+                createHallForm.getSize(),
+                createHallForm.getDisplayName()
         );
 
-        if (hallCreateRequest.getKey() != null || hallCreateRequest.getDescription() != null) {
-            if (hallCreateRequest.getKey() != null) {
-                hallEntity.setKey(hallCreateRequest.getKey().getValue());
+        if (createHallForm.getKey() != null || createHallForm.getDescription() != null) {
+            if (createHallForm.getKey() != null) {
+                hallEntity.setKey(createHallForm.getKey().getValue());
             }
 
-            if (hallCreateRequest.getDescription() != null) {
-                hallEntity.setDescription(hallCreateRequest.getDescription());
+            if (createHallForm.getDescription() != null) {
+                hallEntity.setDescription(createHallForm.getDescription());
             }
 
             hallEntity = hallRepo.update(hallEntity);
@@ -72,32 +72,32 @@ public class RepoHallService implements HallService {
 
     @NotNull
     @Override
-    public Hall update(@NotNull Tag tag, @NotNull HallUpdateRequest hallUpdateRequest) {
+    public Hall update(@NotNull Tag tag, @NotNull UpdateHallForm updateHallForm) {
         HallEntity hallEntity = findImpl(tag);
 
-        if (hallUpdateRequest.getSize() == null && hallUpdateRequest.getDisplayName() == null &&
-                hallUpdateRequest.getKey() == null && hallUpdateRequest.getDescription() == null) {
+        if (updateHallForm.getSize() == null && updateHallForm.getDisplayName() == null &&
+                updateHallForm.getKey() == null && updateHallForm.getDescription() == null) {
             return mapper.from(hallEntity);
         }
 
-        if (hallUpdateRequest.getSize() != null) {
-            if (hallUpdateRequest.getSize() > hallEntity.getUserList().size()) {
+        if (updateHallForm.getSize() != null) {
+            if (updateHallForm.getSize() > hallEntity.getUserList().size()) {
                 throw new ConflictException(ResponseRef.Code.HALL_SIZE_ERROR, ResponseRef.Message.HALL_SIZE_ERROR);
             }
 
-            hallEntity.setSize(hallUpdateRequest.getSize());
+            hallEntity.setSize(updateHallForm.getSize());
         }
 
-        if (hallUpdateRequest.getDisplayName() != null) {
-            hallEntity.setDisplayName(hallUpdateRequest.getDisplayName());
+        if (updateHallForm.getDisplayName() != null) {
+            hallEntity.setDisplayName(updateHallForm.getDisplayName());
         }
 
-        if (hallUpdateRequest.getKey() != null) {
-            hallEntity.setKey(hallUpdateRequest.getKey().getValue());
+        if (updateHallForm.getKey() != null) {
+            hallEntity.setKey(updateHallForm.getKey().getValue());
         }
 
-        if (hallUpdateRequest.getDescription() != null) {
-            hallEntity.setDescription(hallUpdateRequest.getDescription());
+        if (updateHallForm.getDescription() != null) {
+            hallEntity.setDescription(updateHallForm.getDescription());
         }
 
         return mapper.from(hallRepo.update(hallEntity));

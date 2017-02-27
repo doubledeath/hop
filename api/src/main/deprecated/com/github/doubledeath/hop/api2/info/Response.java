@@ -27,13 +27,13 @@ public final class Response {
         public static final String UNKNOWN_ERROR =                          "unknown error";
         public static final String UNKNOWN_RUNTIME_ERROR =                  "unknown runtime error";
         public static final String ACCESS_DENIED_ERROR =                    "access denied";
-        public static final String BAD_REQUEST_ERROR =                      "bad request";
+        public static final String BAD_REQUEST_ERROR =                      "bad form";
 
         public static final String USER_UNKNOWN_ERROR =                     "unknown user error";
         public static final String USER_NOT_FOUND_ERROR =                   "user not found";
         public static final String USER_ALREADY_EXISTS_ERROR =              "user already exists";
         public static final String USER_IN_BAN_LIST_ERROR =                 "user in ban list";
-        public static final String USER_UPDATE_REQUEST_IS_EMPTY_ERROR =     "user request is empty, pass display_name or description";
+        public static final String USER_UPDATE_REQUEST_IS_EMPTY_ERROR =     "user form is empty, pass display_name or description";
         public static final String HALL_UNKNOWN_ERROR =                     "unknown hall error";
         public static final String HALL_NOT_FOUND_ERROR =                   "hall not found";
         public static final String HALL_IS_FULL_ERROR =                     "hall is full";

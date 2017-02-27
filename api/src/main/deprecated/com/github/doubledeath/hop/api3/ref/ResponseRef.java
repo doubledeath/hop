@@ -26,7 +26,7 @@ public final class ResponseRef {
         public static final String UNKNOWN_ERROR =                          "unknown error";
         public static final String UNKNOWN_RUNTIME_ERROR =                  "unknown runtime error";
         public static final String ACCESS_DENIED_ERROR =                    "access denied";
-        public static final String BAD_REQUEST_ERROR =                      "bad request";
+        public static final String BAD_REQUEST_ERROR =                      "bad form";
 
         public static final String USER_UNKNOWN_ERROR =                     "unknown user error";
         public static final String USER_NOT_FOUND_ERROR =                   "user not found";

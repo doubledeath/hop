@@ -3,8 +3,8 @@ package com.github.doubledeath.hop.api3.service;
 import com.github.doubledeath.hop.api3.model.Hall;
 import com.github.doubledeath.hop.api3.model.Key;
 import com.github.doubledeath.hop.api3.model.Tag;
-import com.github.doubledeath.hop.api3.service.request.HallCreateRequest;
-import com.github.doubledeath.hop.api3.service.request.HallUpdateRequest;
+import com.github.doubledeath.hop.api3.service.form.CreateHallForm;
+import com.github.doubledeath.hop.api3.service.form.UpdateHallForm;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,13 +14,13 @@ import org.jetbrains.annotations.Nullable;
 public interface HallService {
 
     @NotNull
-    Hall create(@NotNull HallCreateRequest hallCreateRequest);
+    Hall create(@NotNull CreateHallForm createHallForm);
 
     @NotNull
     Hall find(@NotNull Tag tag);
 
     @NotNull
-    Hall update(@NotNull Tag tag, @NotNull HallUpdateRequest hallUpdateRequest);
+    Hall update(@NotNull Tag tag, @NotNull UpdateHallForm updateHallForm);
 
     void delete(@NotNull Tag tag);
 

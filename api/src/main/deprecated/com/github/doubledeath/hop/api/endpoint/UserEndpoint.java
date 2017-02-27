@@ -43,8 +43,8 @@ public class UserEndpoint {
 //    @Path(EndpointInfo.User.SIGN_UP)
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
-//    public Response signUp(@Valid SignUpUserRequest request) {
-//        return UserInfoResponse.signUp(userService.signUp(request.getLogin(), request.getPassword()));
+//    public Response signUp(@Valid SignUpUserRequest form) {
+//        return UserInfoResponse.signUp(userService.signUp(form.getLogin(), form.getPassword()));
 //    }
 
     @POST
@@ -52,7 +52,7 @@ public class UserEndpoint {
     public void signUp() {
         System.out.println(mapper + "!");
         System.out.println(mapper2 + "!");
-//        return UserInfoResponse.signUp(userService.signUp(request.getLogin(), request.getPassword()));
+//        return UserInfoResponse.signUp(userService.signUp(form.getLogin(), form.getPassword()));
     }
 
     @POST

@@ -2,8 +2,8 @@ package com.github.doubledeath.hop.api3.service;
 
 import com.github.doubledeath.hop.api3.model.Tag;
 import com.github.doubledeath.hop.api3.model.User;
-import com.github.doubledeath.hop.api3.service.request.UserCreateRequest;
-import com.github.doubledeath.hop.api3.service.request.UserUpdateRequest;
+import com.github.doubledeath.hop.api3.service.form.CreateUserForm;
+import com.github.doubledeath.hop.api3.service.form.UpdateUserForm;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -12,12 +12,12 @@ import org.jetbrains.annotations.NotNull;
 public interface UserService {
 
     @NotNull
-    User create(@NotNull UserCreateRequest userCreateRequest);
+    User create(@NotNull CreateUserForm createUserForm);
 
     @NotNull
     User find(@NotNull Tag tag);
 
     @NotNull
-    User update(@NotNull Tag tag, @NotNull UserUpdateRequest userUpdateRequest);
+    User update(@NotNull Tag tag, @NotNull UpdateUserForm updateUserForm);
 
 }

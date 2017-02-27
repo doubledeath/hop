@@ -11,8 +11,8 @@ import com.github.doubledeath.hop.api3.model.builder.TagBuilder;
 import com.github.doubledeath.hop.api3.ref.ResponseRef;
 import com.github.doubledeath.hop.api3.service.TagService;
 import com.github.doubledeath.hop.api3.service.UserService;
-import com.github.doubledeath.hop.api3.service.request.UserCreateRequest;
-import com.github.doubledeath.hop.api3.service.request.UserUpdateRequest;
+import com.github.doubledeath.hop.api3.service.form.CreateUserForm;
+import com.github.doubledeath.hop.api3.service.form.UpdateUserForm;
 import com.github.doubledeath.hop.api3.util.ResourceUtil;
 import org.jetbrains.annotations.NotNull;
 import org.keycloak.admin.client.Keycloak;
@@ -95,13 +95,17 @@ public class KeycloakAdminClientUserService implements UserService {
 
     @NotNull
     @Override
-    public User create(@NotNull UserCreateRequest userCreateRequest) {
+    public User create(@NotNull CreateUserForm createUserForm) {
         UserRepresentation userRepresentation = new UserRepresentation();
 
-        userRepresentation.setUsername(userCreateRequest.getLogin());
-        userRepresentation.setFirstName(tagService.create(userCreateRequest.getLogin()).getComplexValue());
-        userRepresentation.singleAttribute(DISPLAY_NAME, userCreateRequest.getDisplayName());
-        userRepresentation.singleAttribute(DESCRIPTION, userCreateRequest.getDescription());
+        userRepresentation.setUsername(createUserForm.getLogin());
+        userRepresentation.setFirstName(tagService.create(createUserForm.getLogin()).getComplexValue());
+        userRepresentation.singleAttribute(DISPLAY_NAME, createUserForm.getDisplayName());
+
+        if (createUserForm.getDescription() != null) {
+            userRepresentation.singleAttribute(DESCRIPTION, createUserForm.getDescription());
+        }
+
         userRepresentation.setEnabled(true);
         userRepresentation.setEmailVerified(true);
 
@@ -114,7 +118,7 @@ public class KeycloakAdminClientUserService implements UserService {
 
             credentialRepresentation.setTemporary(false);
             credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
-            credentialRepresentation.setValue(userCreateRequest.getPassword());
+            credentialRepresentation.setValue(createUserForm.getPassword());
 
             userResource.resetPassword(credentialRepresentation);
 
@@ -134,18 +138,18 @@ public class KeycloakAdminClientUserService implements UserService {
 
     @NotNull
     @Override
-    public User update(@NotNull Tag tag, @NotNull UserUpdateRequest userUpdateRequest) {
+    public User update(@NotNull Tag tag, @NotNull UpdateUserForm updateUserForm) {
         UserRepresentation userRepresentation = findImpl(tag);
 
-        if (userUpdateRequest.getDisplayName() == null && userUpdateRequest.getDescription() == null) {
+        if (updateUserForm.getDisplayName() == null && updateUserForm.getDescription() == null) {
             return mapper.from(userRepresentation);
         }
 
-        if (userUpdateRequest.getDisplayName() != null) {
-            userRepresentation.singleAttribute(DISPLAY_NAME, userUpdateRequest.getDisplayName());
+        if (updateUserForm.getDisplayName() != null) {
+            userRepresentation.singleAttribute(DISPLAY_NAME, updateUserForm.getDisplayName());
         }
 
-        userRepresentation.singleAttribute(DESCRIPTION, userUpdateRequest.getDescription());
+        userRepresentation.singleAttribute(DESCRIPTION, updateUserForm.getDescription());
 
         realmResource.users().get(userRepresentation.getId()).update(userRepresentation);
 
