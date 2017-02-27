@@ -12,6 +12,13 @@
         <auth-constraint/>
     </security-constraint>
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name/>
+            <url-pattern>/api/hall/test</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
     <!--<security-constraint>-->
         <!--<web-resource-collection>-->
             <!--<web-resource-name/>-->
