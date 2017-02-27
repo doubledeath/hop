@@ -2,9 +2,7 @@ package com.github.doubledeath.hop.api.producer;
 
 import com.github.doubledeath.hop.api.database.repo.HallRepo;
 import com.github.doubledeath.hop.api.database.repo.TagRepo;
-import com.github.doubledeath.hop.api.service.HallService;
 import com.github.doubledeath.hop.api.service.TagService;
-import com.github.doubledeath.hop.api.service.UserService;
 import com.github.doubledeath.hop.api.service.impl.KeycloakAdminClientUserService;
 import com.github.doubledeath.hop.api.service.impl.RepoHallService;
 import com.github.doubledeath.hop.api.service.impl.RepoTagService;

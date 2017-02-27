@@ -15,7 +15,6 @@ public class Hall {
     private Long owner;
     private Long size;
     private String displayName;
-    private String key;
     private String description;
     private List<Long> userList = new ArrayList<>();
     private List<Long> userBanlist = new ArrayList<>();
@@ -45,15 +44,6 @@ public class Hall {
     @NotNull
     public String getDisplayName() {
         return displayName;
-    }
-
-    @Nullable
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     @Nullable

@@ -11,7 +11,6 @@ import com.github.doubledeath.hop.api.exception.BadRequestException;
 import com.github.doubledeath.hop.api.exception.NotFoundException;
 import com.github.doubledeath.hop.api.model.User;
 import com.github.doubledeath.hop.api.model.mapper.UserMapper;
-import com.github.doubledeath.hop.api.service.UserService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
