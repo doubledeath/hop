@@ -4,7 +4,6 @@ import com.github.doubledeath.hop.api.helper.response.ResponseHelper;
 import com.github.doubledeath.hop.api.model.Hall;
 import com.github.doubledeath.hop.api.model.User;
 import com.github.doubledeath.hop.api.model.mapper.HallMapper;
-import com.github.doubledeath.hop.api.service.HallService;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

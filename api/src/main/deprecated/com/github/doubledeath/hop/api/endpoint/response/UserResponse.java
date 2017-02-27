@@ -3,7 +3,6 @@ package com.github.doubledeath.hop.api.endpoint.response;
 import com.github.doubledeath.hop.api.helper.response.ResponseHelper;
 import com.github.doubledeath.hop.api.model.User;
 import com.github.doubledeath.hop.api.model.mapper.UserMapper;
-import com.github.doubledeath.hop.api.service.UserService;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

@@ -7,7 +7,6 @@ import com.github.doubledeath.hop.api.helper.TagHelper;
 import com.github.doubledeath.hop.api.model.User;
 import com.github.doubledeath.hop.api.model.mapper.UserMapper;
 import com.github.doubledeath.hop.api.service.TagService;
-import com.github.doubledeath.hop.api.service.UserService;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.representations.idm.CredentialRepresentation;

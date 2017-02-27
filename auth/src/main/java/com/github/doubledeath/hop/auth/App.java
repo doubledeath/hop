@@ -8,6 +8,7 @@ import org.wildfly.swarm.Swarm;
 public class App {
 
     protected App() {
+
     }
 
     public static void main(String... args) throws Exception {

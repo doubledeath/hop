@@ -5,7 +5,6 @@ import com.github.doubledeath.hop.api.database.repo.HallRepo;
 import com.github.doubledeath.hop.api.model.Hall;
 import com.github.doubledeath.hop.api.model.User;
 import com.github.doubledeath.hop.api.model.mapper.HallMapper;
-import com.github.doubledeath.hop.api.service.HallService;
 import com.github.doubledeath.hop.api.service.TagService;
 
 import javax.inject.Inject;
