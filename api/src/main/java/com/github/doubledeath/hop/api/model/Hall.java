@@ -1,29 +1,50 @@
 package com.github.doubledeath.hop.api.model;
 
+import com.github.doubledeath.hop.api.model.converter.ListLongToJsonbConverter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by doubledeath on 2/27/17.
  */
-public class Hall {
+@Entity
+public class Hall implements Serializable {
 
+    private static final long serialVersionUID = -3666621854096075836L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, unique = true)
     private Long tag;
+    @Column(nullable = false)
     private Long owner;
+    @Column(nullable = false)
     private Long size;
+    @Column(nullable = false, columnDefinition = "text")
     private String displayName;
+    @Column(columnDefinition = "text")
+    private String key;
+    @Column(columnDefinition = "text")
     private String description;
-    private List<Long> userList = new ArrayList<>();
-    private List<Long> userBanlist = new ArrayList<>();
+    @Column(nullable = false, columnDefinition = "jsonb default '[]'")
+    @Convert(converter = ListLongToJsonbConverter.class)
+    private List<Long> userList;
+    @Column(nullable = false, columnDefinition = "jsonb default '[]'")
+    @Convert(converter = ListLongToJsonbConverter.class)
+    private List<Long> userBanlist;
 
-    public Hall(@NotNull Long tag, @NotNull Long owner, @NotNull Long size, @NotNull String displayName) {
-        this.tag = tag;
-        this.owner = owner;
-        this.size = size;
-        this.displayName = displayName;
+    @NotNull
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(@NotNull Long id) {
+        this.id = id;
     }
 
     @NotNull
@@ -31,9 +52,17 @@ public class Hall {
         return tag;
     }
 
+    public void setTag(@NotNull Long tag) {
+        this.tag = tag;
+    }
+
     @NotNull
     public Long getOwner() {
         return owner;
+    }
+
+    public void setOwner(@NotNull Long owner) {
+        this.owner = owner;
     }
 
     @NotNull
@@ -41,9 +70,26 @@ public class Hall {
         return size;
     }
 
+    public void setSize(@NotNull Long size) {
+        this.size = size;
+    }
+
     @NotNull
     public String getDisplayName() {
         return displayName;
+    }
+
+    public void setDisplayName(@NotNull String displayName) {
+        this.displayName = displayName;
+    }
+
+    @Nullable
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     @Nullable
@@ -75,7 +121,7 @@ public class Hall {
 
     @Override
     public boolean equals(Object object) {
-        return this == object || object instanceof Hall && tag.equals(((Hall) object).tag);
+        return this == object || object instanceof Hall && id.equals(((Hall) object).id);
     }
 
 }

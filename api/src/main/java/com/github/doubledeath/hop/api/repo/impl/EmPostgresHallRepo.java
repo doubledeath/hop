@@ -1,9 +1,9 @@
-package com.github.doubledeath.hop.api.db.repo.impl;
+package com.github.doubledeath.hop.api.repo.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.doubledeath.hop.api.db.entity.HallEntity;
-import com.github.doubledeath.hop.api.db.repo.HallRepo;
+import com.github.doubledeath.hop.api.model.Hall;
+import com.github.doubledeath.hop.api.repo.HallRepo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,15 +31,21 @@ public class EmPostgresHallRepo implements HallRepo {
 
     @NotNull
     @Override
-    public HallEntity create(@NotNull Long tag, @NotNull Long owner, @NotNull Long size, @NotNull String displayName) {
+    public Hall create(@NotNull Long tag, @NotNull Long owner, @NotNull Long size, @NotNull String displayName) {
         try {
-            String[] columnArray = {"tag", "owner", "size", "displayname", "userlist"};
+            String[] columnArray = {
+                    "tag",
+                    "owner",
+                    "size",
+                    "displayname",
+                    "userlist"
+            };
             Object[] valueArray = {
                     tag,
                     owner,
                     size,
-                    "'" + displayName + "'",
-                    "'" + objectMapper.writeValueAsString(Collections.singleton(owner)) + "'"
+                    quote(displayName),
+                    quote(objectMapper.writeValueAsString(Collections.singleton(owner)))
             };
             String columns = Arrays.stream(columnArray)
                     .collect(Collectors.joining(", "));
@@ -48,84 +54,98 @@ public class EmPostgresHallRepo implements HallRepo {
                     .collect(Collectors.joining(", "));
 
             entityManager.createNativeQuery(
-                    "insert into hallentity (" + columns + ") values (" + values + ");"
+                    "insert into hall (" + columns + ") values (" + values + ");"
             ).executeUpdate();
         } catch (JsonProcessingException exception) {
             throw new RuntimeException(exception);
         }
 
-        HallEntity hallEntity = findByTagImpl(tag);
+        Hall hall = findByTagImpl(tag);
 
-        if (hallEntity == null) {
+        if (hall == null) {
             throw new RuntimeException();
         }
 
-        return hallEntity;
+        return hall;
     }
 
     @Nullable
     @Override
-    public HallEntity findByTag(@NotNull Long tag) {
+    public Hall findByTag(@NotNull Long tag) {
         return findByTagImpl(tag);
     }
 
     @NotNull
     @Override
-    public HallEntity update(@NotNull HallEntity hallEntity) {
+    public Hall update(@NotNull Hall hall) {
         try {
-            String[] columnArray = {"tag", "owner", "size", "displayname", "key", "description", "userlist", "userbanlist"};
+            String[] columnArray = {
+                    "tag",
+                    "owner",
+                    "size",
+                    "displayname",
+                    "key",
+                    "description",
+                    "userlist",
+                    "userbanlist"
+            };
             Object[] valueArray = {
-                    hallEntity.getTag(),
-                    hallEntity.getOwner(),
-                    hallEntity.getSize(),
-                    "'" + hallEntity.getDisplayName() + "'",
-                    "'" + hallEntity.getKey() + "'",
-                    "'" + hallEntity.getDescription() + "'",
-                    "'" + objectMapper.writeValueAsString(hallEntity.getUserList()) + "'",
-                    "'" + objectMapper.writeValueAsString(hallEntity.getUserBanlist()) + "'"
+                    hall.getTag(),
+                    hall.getOwner(),
+                    hall.getSize(),
+                    quote(hall.getDisplayName()),
+                    quote(hall.getKey()),
+                    quote(hall.getDescription()),
+                    quote(objectMapper.writeValueAsString(hall.getUserList())),
+                    quote(objectMapper.writeValueAsString(hall.getUserBanlist()))
             };
             String set = IntStream.range(0, columnArray.length)
                     .mapToObj(i -> columnArray[i] + " = " + valueArray[i])
                     .collect(Collectors.joining(", "));
 
             entityManager.createNativeQuery(
-                    "update hallentity set " + set + " where id = " + hallEntity.getId() + ";"
+                    "update hall set " + set + " where id = " + hall.getId() + ";"
             ).executeUpdate();
         } catch (JsonProcessingException exception) {
             throw new RuntimeException(exception);
         }
 
-        return entityManager.find(HallEntity.class, hallEntity.getId());
+        return entityManager.find(Hall.class, hall.getId());
     }
 
     @Override
-    public void delete(@NotNull Long tag) {
-        HallEntity hallEntity = findByTagImpl(tag);
+    public void delete(@NotNull Long id) {
+        Hall hall = entityManager.find(Hall.class, id);
 
-        if (hallEntity != null) {
-            entityManager.remove(hallEntity);
+        if (hall != null) {
+            entityManager.remove(hall);
         }
     }
 
     @Nullable
-    private HallEntity findByTagImpl(@NotNull Long tag) {
+    private Hall findByTagImpl(@NotNull Long tag) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<HallEntity> criteriaQuery = criteriaBuilder.createQuery(HallEntity.class);
-        HallEntity hallEntity;
+        CriteriaQuery<Hall> criteriaQuery = criteriaBuilder.createQuery(Hall.class);
+        Hall hall;
 
         try {
-            hallEntity = entityManager
+            hall = entityManager
                     .createQuery(criteriaQuery
-                            .select(criteriaQuery.from(HallEntity.class))
+                            .select(criteriaQuery.from(Hall.class))
                             .where(criteriaBuilder.equal(criteriaQuery
-                                    .from(HallEntity.class)
+                                    .from(Hall.class)
                                     .get("tag"), tag)))
                     .getSingleResult();
         } catch (NoResultException exception) {
-            hallEntity = null;
+            hall = null;
         }
 
-        return hallEntity;
+        return hall;
+    }
+
+    @Nullable
+    private String quote(@Nullable String target) {
+        return target == null ? null : "'" + target + "'";
     }
 
 }

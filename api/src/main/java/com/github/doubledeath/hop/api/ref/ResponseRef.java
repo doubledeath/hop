@@ -18,7 +18,7 @@ public final class ResponseRef {
 //
         public static final Long HALL_UNKNOWN_ERROR =                       20100L;
         public static final Long HALL_NOT_FOUND_ERROR =                     20101L;
-        public static final Long USER_NOT_HALL_OWNER_ERROR =                20102L;
+//        public static final Long USER_NOT_HALL_OWNER_ERROR =                20102L;
 //        public static final Long HALL_SIZE_ERROR =                          20102L;
 //        public static final Long HALL_INVALID_KEY_ERROR =                   20103L;
 //        public static final Long HALL_USER_IN_BANLIST_ERROR =               20104L;
@@ -27,16 +27,16 @@ public final class ResponseRef {
     public static final class Message {
         public static final String UNKNOWN_ERROR =                          "unknown error";
         public static final String ACCESS_DENIED_ERROR =                    "access denied";
-        public static final String BAD_REQUEST_ERROR =                      "bad form";
+        public static final String BAD_REQUEST_ERROR =                      "bad request";
 
-        public static final String USER_UNKNOWN_ERROR =                     "unknown user error";
+        public static final String USER_UNKNOWN_ERROR =                     "unknown error";
         public static final String USER_NOT_FOUND_ERROR =                   "user not found";
 //        public static final String USER_NOT_OWNER_ERROR =                   "user not owner";
 //        public static final String USERNAME_TAKEN_ERROR =                   "username already taken";
 //
-        public static final String HALL_UNKNOWN_ERROR =                     "unknown hall error";
+        public static final String HALL_UNKNOWN_ERROR =                     "unknown error";
         public static final String HALL_NOT_FOUND_ERROR =                   "hall not found";
-        public static final String USER_NOT_HALL_OWNER_ERROR =              "user is not hall owner";
+//        public static final String USER_NOT_HALL_OWNER_ERROR =              "user is not hall owner";
 //        public static final String HALL_SIZE_ERROR =                        "hall size is less then user list size";
 //        public static final String HALL_INVALID_KEY_ERROR =                 "invalid key to hall";
 //        public static final String HALL_USER_IN_BANLIST_ERROR =             "user in banlist for this hall";
