@@ -1,4 +1,4 @@
-package com.github.doubledeath.hop.api.db.entity.converter;
+package com.github.doubledeath.hop.api.model.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
