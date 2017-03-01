@@ -114,12 +114,8 @@ public class EmPostgresHallRepo implements HallRepo {
     }
 
     @Override
-    public void delete(@NotNull Long id) {
-        Hall hall = entityManager.find(Hall.class, id);
-
-        if (hall != null) {
-            entityManager.remove(hall);
-        }
+    public void delete(@NotNull Hall hall) {
+        entityManager.remove(hall);
     }
 
     @Nullable

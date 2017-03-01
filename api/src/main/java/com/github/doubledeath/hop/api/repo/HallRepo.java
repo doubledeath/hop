@@ -21,6 +21,6 @@ public interface HallRepo {
     @NotNull
     Hall update(@NotNull Hall hall);
 
-    void delete(@NotNull Long id);
+    void delete(@NotNull Hall hall);
 
 }
