@@ -1,0 +1,15 @@
+swarm:
+  ds:
+    connection:
+      url: url
+    name: name
+    username: username
+    password: password
+  keycloak:
+    json:
+      path: keycloak.json
+    security:
+      constraints:
+        - url-pattern: /secured
+          methods: [GET]
+          roles: [god]
