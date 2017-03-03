@@ -11,4 +11,6 @@ import javax.ws.rs.core.Application;
 @ApplicationPath(EndpointRef.API)
 public class App extends Application {
 
+    public static final String VERSION = "v1";
+
 }
