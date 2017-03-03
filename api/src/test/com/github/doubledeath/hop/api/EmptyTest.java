@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 /**
  * Created by doubledeath on 2/28/17.
  */
-@SuppressWarnings("unused")
 @RunWith(Arquillian.class)
 public class EmptyTest {
 

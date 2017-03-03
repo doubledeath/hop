@@ -9,14 +9,11 @@ import org.wildfly.swarm.undertow.WARArchive;
  */
 public class TestBuilder {
 
-    private static final String PERSISTENCE_XML = "META-INF/persistence.xml";
-    private static final String PROJECT_DEFAULTS_YML = "project-defaults.yml";
-
     public static Archive buildDeployment() {
         return ShrinkWrap.create(WARArchive.class)
                 .addPackages(true, App.class.getPackage())
-                .addAsResource(PERSISTENCE_XML)
-                .addAsResource(PROJECT_DEFAULTS_YML);
+                .addAsResource("META-INF/persistence.xml")
+                .addAsResource("project-defaults.yml");
     }
 
 }
