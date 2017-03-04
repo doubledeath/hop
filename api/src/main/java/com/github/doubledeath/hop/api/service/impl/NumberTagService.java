@@ -34,7 +34,6 @@ abstract class NumberTagService implements TagService {
         max = min * 10;
     }
 
-    @TransactionAttribute
     @NotNull
     @Override
     public String generate() {
@@ -60,7 +59,6 @@ abstract class NumberTagService implements TagService {
         return String.valueOf(value);
     }
 
-    @TransactionAttribute
     @Override
     public void delete(@NotNull String tag) {
         entityManager.createNativeQuery(

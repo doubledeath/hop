@@ -1,8 +1,10 @@
 package com.github.doubledeath.hop.api.service.impl;
 
 import com.github.doubledeath.hop.api.service.TagService;
+import org.jetbrains.annotations.NotNull;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 
 /**
  * Created by doubledeath on 4/03/17.
@@ -13,6 +15,19 @@ public class DefaultTagService extends NumberTagService implements TagService {
 
     public DefaultTagService() {
         super(5L);
+    }
+
+    @TransactionAttribute
+    @NotNull
+    @Override
+    public String generate() {
+        return super.generate();
+    }
+
+    @TransactionAttribute
+    @Override
+    public void delete(@NotNull String tag) {
+        super.delete(tag);
     }
 
 }
