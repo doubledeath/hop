@@ -3,7 +3,6 @@ package com.github.doubledeath.hop.api.service.impl;
 import com.github.doubledeath.hop.api.service.TagService;
 import org.jetbrains.annotations.NotNull;
 
-import javax.ejb.TransactionAttribute;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Random;
