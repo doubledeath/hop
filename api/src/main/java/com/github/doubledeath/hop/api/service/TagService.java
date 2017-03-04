@@ -13,4 +13,6 @@ public interface TagService {
     @NotNull
     String generate();
 
+    void delete(@NotNull String tag);
+
 }

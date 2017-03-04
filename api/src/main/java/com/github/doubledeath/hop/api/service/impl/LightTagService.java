@@ -8,11 +8,11 @@ import javax.ejb.Stateless;
  * Created by doubledeath on 4/03/17.
  */
 @SuppressWarnings("unused")
-@Stateless(name = "default")
-public class DefaultTagService extends NumberTagService implements TagService {
+@Stateless(name = "light")
+public class LightTagService extends NumberTagService implements TagService {
 
-    public DefaultTagService() {
-        super(5L);
+    public LightTagService() {
+        super(2L);
     }
 
 }
