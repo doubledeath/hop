@@ -60,7 +60,7 @@ public class RepoHallService implements HallService {
     public Hall update(Hall hall) {
         HallEntity hallEntity = hallRepo.findOneByTag(hall.getTag());
 
-        //visibility changed, need to generate new tag
+        //visibility changed, need to create new tag
         if (!hall.getVisibility().name().equals(hallEntity.getVisibility().name())) {
             hallEntity.setTag(tagService.createSimpleTag());
         }

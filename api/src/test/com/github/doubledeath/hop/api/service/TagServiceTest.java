@@ -32,22 +32,25 @@ public class TagServiceTest {
     }
 
     @Test
-    public void generate() {
-        Set<String> firstSet = IntStream.range(0, TAG_COUNT)
-                .mapToObj(i -> tagService.generate())
+    public void full() {
+        Set<String> firstSet = IntStream
+                .range(0, TAG_COUNT)
+                .mapToObj(i -> tagService.create())
                 .collect(Collectors.toSet());
 
         Assert.assertTrue(firstSet.size() == TAG_COUNT);
 
         firstSet.forEach(tagService::delete);
 
-        Set<String> secondSet = IntStream.range(0, TAG_COUNT)
-                .mapToObj(i -> tagService.generate())
+        Set<String> secondSet = IntStream
+                .range(0, TAG_COUNT)
+                .mapToObj(i -> tagService.create())
                 .collect(Collectors.toSet());
 
         Assert.assertTrue(secondSet.size() == TAG_COUNT);
 
-        Set<String> resultSet = Stream.concat(firstSet.stream(), secondSet.stream())
+        Set<String> resultSet = Stream
+                .concat(firstSet.stream(), secondSet.stream())
                 .collect(Collectors.toSet());
 
         Assert.assertTrue(resultSet.size() < TAG_COUNT * 2);

@@ -1,4 +1,4 @@
-package com.github.doubledeath.hop.api.service.impl;
+package com.github.doubledeath.hop.api.service.impl.tag;
 
 import com.github.doubledeath.hop.api.service.TagService;
 import org.jetbrains.annotations.NotNull;
@@ -28,14 +28,16 @@ abstract class NumberTagService implements TagService {
             throw new IllegalArgumentException();
         }
 
-        LongStream.range(0, n - 1).forEach(value -> min *= 10);
+        LongStream
+                .range(0, n - 1)
+                .forEach(value -> min *= 10);
 
         max = min * 10;
     }
 
     @NotNull
     @Override
-    public String generate() {
+    public String create() {
         Object tag;
         Long value = 0L;
 
@@ -43,33 +45,36 @@ abstract class NumberTagService implements TagService {
             value += random.longs(1, min, max).sum();
 
             try {
-                tag = entityManager.createNativeQuery(
-                        "select * from Tag where value = " + value
-                ).getSingleResult();
+                tag = entityManager
+                        .createNativeQuery(
+                                "select * from Tag where value = " + value)
+                        .getSingleResult();
             } catch (NoResultException exception) {
                 tag = null;
             }
         } while (tag != null);
 
-        entityManager.createNativeQuery(
-                "insert into Tag (value) values (" + value + ");"
-        ).executeUpdate();
+        entityManager
+                .createNativeQuery(
+                        "insert into Tag (value) values (" + value + ")")
+                .executeUpdate();
 
         return String.valueOf(value);
     }
 
     @Override
     public void delete(@NotNull String tag) {
-        entityManager.createNativeQuery(
-                "delete from Tag where value = " + tag + ";"
-        ).executeUpdate();
+        entityManager
+                .createNativeQuery(
+                        "delete from Tag where value = " + tag)
+                .executeUpdate();
     }
 
     @Entity
     @Table(name = "Tag")
-    final static class Tag implements Serializable {
+    private static final class Tag implements Serializable {
 
-        private static final long serialVersionUID = -6176205374355179673L;
+        private static final long serialVersionUID = 4141525733107721413L;
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

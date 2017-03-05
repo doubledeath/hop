@@ -146,7 +146,7 @@ public class RepoHallService implements HallService {
             throw new NotFoundException(Response.Code.HALL_NOT_FOUND_ERROR, Response.Message.HALL_NOT_FOUND_ERROR);
         }
 
-        //visibility changed, need to generate new tag
+        //visibility changed, need to create new tag
         if (!hall.getVisibility().name().equals(hallEntity.getVisibility().name())) {
             hallEntity.setTag(tagService.createSimpleTag().getValue());
         }

@@ -1,4 +1,4 @@
-package com.github.doubledeath.hop.api.service.impl;
+package com.github.doubledeath.hop.api.service.impl.tag;
 
 import com.github.doubledeath.hop.api.service.TagService;
 import org.jetbrains.annotations.NotNull;
@@ -10,18 +10,18 @@ import javax.ejb.TransactionAttribute;
  * Created by doubledeath on 4/03/17.
  */
 @SuppressWarnings("unused")
-@Stateless(name = "light")
-public class LightTagService extends NumberTagService implements TagService {
+@Stateless(name = "default")
+public class DefaultTagService extends NumberTagService implements TagService {
 
-    public LightTagService() {
-        super(2L);
+    public DefaultTagService() {
+        super(5L);
     }
 
     @TransactionAttribute
     @NotNull
     @Override
-    public String generate() {
-        return super.generate();
+    public String create() {
+        return super.create();
     }
 
     @TransactionAttribute
