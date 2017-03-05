@@ -63,18 +63,21 @@ public class DefaultHallRepo implements HallRepo {
         return hall;
     }
 
+    @TransactionAttribute
     @Nullable
     @Override
     public Hall findByTag(@NotNull String tag) {
         return findByTagImpl(tag);
     }
 
+    @TransactionAttribute
     @NotNull
     @Override
     public Hall update(@NotNull Hall hall) {
         return null;
     }
 
+    @TransactionAttribute
     @Override
     public void delete(@NotNull Hall hall) {
         entityManager
