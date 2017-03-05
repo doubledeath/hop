@@ -79,7 +79,7 @@ public class DefaultHallRepo implements HallRepo {
     public void delete(@NotNull Hall hall) {
         entityManager
                 .createNativeQuery(
-                        "delete from Hall where tag = " + quote(hall.getTag()))
+                        "delete from Hall where id = " + hall.getId())
                 .executeUpdate();
     }
 
