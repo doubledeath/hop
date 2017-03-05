@@ -55,7 +55,7 @@ public class DefaultHallRepo implements HallRepo {
 
         Hall hall = findByTag(tag);
 
-        //guess never happens
+        //never happens
         if (hall == null) {
             throw new RuntimeException();
         }
