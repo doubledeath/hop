@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @RunWith(Arquillian.class)
 public class TagServiceTest {
 
-    private static final int TAG_COUNT = 101;
+    private static final int TAG_COUNT = 11;
 
     @EJB(beanName = "light")
     private TagService tagService;

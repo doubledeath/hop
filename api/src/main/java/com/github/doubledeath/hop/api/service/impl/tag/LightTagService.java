@@ -14,7 +14,7 @@ import javax.ejb.TransactionAttribute;
 public class LightTagService extends NumberTagService implements TagService {
 
     public LightTagService() {
-        super(2L);
+        super(1L);
     }
 
     @TransactionAttribute
