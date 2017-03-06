@@ -33,7 +33,7 @@ public class DefaultHallRepo implements HallRepo {
                 "pendingUserList",
                 "enteredUserList"
         };
-        Object[] valueArray = {
+        String[] valueArray = {
                 tag,
                 owner,
                 "[]",
@@ -44,7 +44,6 @@ public class DefaultHallRepo implements HallRepo {
                 .collect(Collectors.joining(", "));
         String values = Arrays
                 .stream(valueArray)
-                .map(String::valueOf)
                 .map(this::quote)
                 .collect(Collectors.joining(", "));
 
