@@ -11,6 +11,8 @@ import javax.ejb.Local;
 public interface TagService {
 
     @NotNull
-    String generate();
+    String create();
+
+    void delete(@NotNull String tag);
 
 }
