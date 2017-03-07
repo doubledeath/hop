@@ -1,6 +1,8 @@
 package com.github.doubledeath.hop.api.service;
 
 import com.github.doubledeath.hop.api.TestBuilder;
+import com.github.doubledeath.hop.api.service.impl.tag.Impl;
+import com.github.doubledeath.hop.api.service.impl.tag.TagServiceImpl;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -8,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,7 +25,8 @@ public class TagServiceTest {
 
     private static final int TAG_COUNT = 11;
 
-    @EJB(beanName = "light")
+    @TagServiceImpl(Impl.NUMBER_TWO_DIGITS)
+    @Inject
     private TagService tagService;
 
     @Deployment

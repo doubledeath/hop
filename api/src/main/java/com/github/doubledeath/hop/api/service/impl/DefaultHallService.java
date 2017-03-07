@@ -4,9 +4,11 @@ import com.github.doubledeath.hop.api.model.Hall;
 import com.github.doubledeath.hop.api.repo.HallRepo;
 import com.github.doubledeath.hop.api.service.HallService;
 import com.github.doubledeath.hop.api.service.TagService;
+import com.github.doubledeath.hop.api.service.impl.tag.Impl;
+import com.github.doubledeath.hop.api.service.impl.tag.TagServiceImpl;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,9 +20,10 @@ import java.util.stream.IntStream;
 @Stateless
 public class DefaultHallService implements HallService {
 
-    @EJB
+    @Inject
     private HallRepo hallRepo;
-    @EJB(beanName = "default")
+    @TagServiceImpl(Impl.NUMBER_FIVE_DIGITS)
+    @Inject
     private TagService tagService;
 
     @Override

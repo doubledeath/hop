@@ -5,16 +5,22 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.inject.Qualifier;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Created by doubledeath on 4/03/17.
  */
 @SuppressWarnings("unused")
-@Stateless(name = "default")
-public class DefaultTagService extends NumberTagService implements TagService {
+@Stateless(name = "two")
+public class TwoDigitsTagService extends NumberTagService implements TagService {
 
-    public DefaultTagService() {
-        super(5L);
+    public TwoDigitsTagService() {
+        super(1L);
     }
 
     @TransactionAttribute
@@ -28,6 +34,13 @@ public class DefaultTagService extends NumberTagService implements TagService {
     @Override
     public void delete(@NotNull String tag) {
         super.delete(tag);
+    }
+
+    @Qualifier
+    @Retention(RUNTIME)
+    @Target({TYPE, METHOD, FIELD, PARAMETER})
+    public @interface Impl {
+
     }
 
 }

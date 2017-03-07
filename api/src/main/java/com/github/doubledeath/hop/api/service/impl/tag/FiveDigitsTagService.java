@@ -5,16 +5,17 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.enterprise.inject.Default;
 
 /**
  * Created by doubledeath on 4/03/17.
  */
 @SuppressWarnings("unused")
-@Stateless(name = "light")
-public class LightTagService extends NumberTagService implements TagService {
+@Stateless(name = "five")
+public class FiveDigitsTagService extends NumberTagService implements TagService {
 
-    public LightTagService() {
-        super(1L);
+    public FiveDigitsTagService() {
+        super(5L);
     }
 
     @TransactionAttribute
