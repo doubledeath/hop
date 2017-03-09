@@ -10,8 +10,8 @@ import java.util.stream.LongStream;
 
 /**
  * Generate N+ digit number unique random tag.<br/>
- * ---(2 <= N <= 7)---<br/>
- * ---(10 <= generated < {@link Long#MAX_VALUE})---<br/>
+ * ---(1 <= N <= 7)---<br/>
+ * ---(1 <= generated < {@link Long#MAX_VALUE})---<br/>
  * Tags can be deleted, so they can be generated again.
  */
 @SuppressWarnings("unused")
@@ -24,7 +24,7 @@ abstract class NumberTagService implements TagService {
     private Long max = 1L;
 
     NumberTagService(@NotNull Long n) {
-        if (n < 2 || n > 7) {
+        if (n < 1 || n > 7) {
             throw new IllegalArgumentException();
         }
 

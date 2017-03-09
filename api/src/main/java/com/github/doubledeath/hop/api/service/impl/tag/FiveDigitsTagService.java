@@ -5,15 +5,16 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.enterprise.inject.Default;
 
 /**
  * Created by doubledeath on 4/03/17.
  */
 @SuppressWarnings("unused")
-@Stateless(name = "default")
-public class DefaultTagService extends NumberTagService implements TagService {
+@Stateless(name = "five")
+public class FiveDigitsTagService extends NumberTagService implements TagService {
 
-    public DefaultTagService() {
+    public FiveDigitsTagService() {
         super(5L);
     }
 
