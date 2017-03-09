@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  * Created by doubledeath on 3/4/17.
  */
 @SuppressWarnings("unused")
-@RunWith(Arquillian.class)
+//@RunWith(Arquillian.class)
 public class TagServiceTest {
 
     private static final int TAG_COUNT = 11;

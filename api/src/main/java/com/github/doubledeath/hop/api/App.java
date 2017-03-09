@@ -8,7 +8,7 @@ import javax.ws.rs.core.Application;
 /**
  * Created by doubledeath on 2/27/17.
  */
-//@ApplicationPath(EndpointRef.API)
+@ApplicationPath(EndpointRef.API)
 public class App extends Application {
 
     public static final String VERSION = "v1";
