@@ -15,6 +15,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({TYPE, METHOD, FIELD, PARAMETER})
 public @interface TagServiceImpl {
 
-    Impl value();
+    Name value();
+
+    enum Name {
+
+        NUMBER_TWO_DIGITS,
+        NUMBER_FIVE_DIGITS
+
+    }
 
 }

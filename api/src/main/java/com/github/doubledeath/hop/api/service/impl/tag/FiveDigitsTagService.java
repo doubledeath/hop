@@ -11,7 +11,7 @@ import javax.enterprise.inject.Default;
  * Created by doubledeath on 4/03/17.
  */
 @SuppressWarnings("unused")
-@Stateless(name = "five")
+@Stateless(name = "numberFiveDigits")
 public class FiveDigitsTagService extends NumberTagService implements TagService {
 
     public FiveDigitsTagService() {

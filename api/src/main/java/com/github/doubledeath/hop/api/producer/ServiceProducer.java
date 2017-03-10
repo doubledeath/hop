@@ -1,11 +1,11 @@
 package com.github.doubledeath.hop.api.producer;
 
 import com.github.doubledeath.hop.api.service.TagService;
-import com.github.doubledeath.hop.api.service.impl.tag.Impl;
 import com.github.doubledeath.hop.api.service.impl.tag.TagServiceImpl;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.New;
 import javax.enterprise.inject.Produces;
 
 /**
@@ -15,20 +15,20 @@ import javax.enterprise.inject.Produces;
 @ApplicationScoped
 public class ServiceProducer {
 
-    @EJB(beanName = "two")
+    @EJB(beanName = "numberTwoDigits")
     private TagService twoDigitsTagService;
-    @EJB(beanName = "five")
+    @EJB(beanName = "numberFiveDigits")
     private TagService fiveDigitsTagService;
 
-    @TagServiceImpl(Impl.NUMBER_TWO_DIGITS)
+    @TagServiceImpl(TagServiceImpl.Name.NUMBER_TWO_DIGITS)
     @Produces
     public TagService twoDigitsTagService() {
         return twoDigitsTagService;
     }
 
-    @TagServiceImpl(Impl.NUMBER_FIVE_DIGITS)
+    @TagServiceImpl(TagServiceImpl.Name.NUMBER_FIVE_DIGITS)
     @Produces
-    public TagService fiveDigitsTagService() {
+    public TagService tagService() {
         return fiveDigitsTagService;
     }
 

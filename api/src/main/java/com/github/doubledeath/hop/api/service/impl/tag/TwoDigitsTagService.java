@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Created by doubledeath on 4/03/17.
  */
 @SuppressWarnings("unused")
-@Stateless(name = "two")
+@Stateless(name = "numberTwoDigits")
 public class TwoDigitsTagService extends NumberTagService implements TagService {
 
     public TwoDigitsTagService() {

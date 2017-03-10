@@ -56,14 +56,10 @@ public class DefaultHallRepo implements HallRepo {
                         "insert into Hall (" + columns + ") values (" + values + ")")
                 .executeUpdate();
 
-        Hall hall = findByTag(tag);
-
-        //never happens
-        if (hall == null) {
-            throw new RuntimeException();
-        }
-
-        return hall;
+        return (Hall) entityManager
+                .createNativeQuery(
+                        "select * from Hall where tag = " + quote(tag), Hall.class)
+                .getSingleResult();
     }
 
     @TransactionAttribute
@@ -81,14 +77,14 @@ public class DefaultHallRepo implements HallRepo {
         String[] valueArray;
 
         try {
-            columnArray = new String[] {
+            columnArray = new String[]{
                     "tag",
                     "owner",
                     "description",
                     "pendingUserList",
                     "enteredUserList"
             };
-            valueArray = new String[] {
+            valueArray = new String[]{
                     hall.getTag(),
                     hall.getOwner(),
                     hall.getDescription(),
@@ -105,7 +101,7 @@ public class DefaultHallRepo implements HallRepo {
 
         entityManager
                 .createNativeQuery(
-                    "update hallentity set " + set + " where tag = " + hall.getId())
+                        "update hallentity set " + set + " where tag = " + hall.getId())
                 .executeUpdate();
 
         return hall;

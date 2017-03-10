@@ -1,23 +1,16 @@
-package com.github.doubledeath.hop.api.service;
+package com.github.doubledeath.hop.api;
 
-import com.github.doubledeath.hop.api.TestBuilder;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.ejb.EJB;
-
 /**
- * Created by doubledeath on 3/5/17.
+ * Created by doubledeath on 2/28/17.
  */
-@SuppressWarnings("unused")
-//@RunWith(Arquillian.class)
-public class HallServiceTest {
-
-    @EJB
-    private HallService hallService;
+@RunWith(Arquillian.class)
+public class EmptyTest {
 
     @Deployment
     public static Archive createDeployment() {
@@ -25,8 +18,8 @@ public class HallServiceTest {
     }
 
     @Test
-    public void test() {
-        hallService.test();
+    public void nothing() {
+
     }
 
 }

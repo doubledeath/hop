@@ -1,7 +1,6 @@
 package com.github.doubledeath.hop.api.service;
 
 import com.github.doubledeath.hop.api.TestBuilder;
-import com.github.doubledeath.hop.api.service.impl.tag.Impl;
 import com.github.doubledeath.hop.api.service.impl.tag.TagServiceImpl;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -20,12 +19,12 @@ import java.util.stream.Stream;
  * Created by doubledeath on 3/4/17.
  */
 @SuppressWarnings("unused")
-//@RunWith(Arquillian.class)
+@RunWith(Arquillian.class)
 public class TagServiceTest {
 
     private static final int TAG_COUNT = 11;
 
-    @TagServiceImpl(Impl.NUMBER_TWO_DIGITS)
+    @TagServiceImpl(TagServiceImpl.Name.NUMBER_TWO_DIGITS)
     @Inject
     private TagService tagService;
 
