@@ -6,8 +6,16 @@ swarm:
     username: username
     password: password
   keycloak:
-    json:
-      path: keycloak.json
+    secure-deployments:
+      api-1.0-SNAPSHOT.war:
+        realm: realm
+        auth-server-url: auth-server-url
+        ssl-required: ssl-required
+        resource: resource
+        credentials:
+          secret:
+            value:
+              value
     security:
       constraints:
         - url-pattern: /secured

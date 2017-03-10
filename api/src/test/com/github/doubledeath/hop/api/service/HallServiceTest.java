@@ -13,7 +13,7 @@ import javax.ejb.EJB;
  * Created by doubledeath on 3/5/17.
  */
 @SuppressWarnings("unused")
-@RunWith(Arquillian.class)
+//@RunWith(Arquillian.class)
 public class HallServiceTest {
 
     @EJB

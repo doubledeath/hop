@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 /**
  * Created by doubledeath on 2/28/17.
  */
-@RunWith(Arquillian.class)
+//@RunWith(Arquillian.class)
 public class EmptyTest {
 
     @Deployment
